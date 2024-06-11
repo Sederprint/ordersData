@@ -216,3 +216,62 @@ function setCheckedValues(name, values) {
   });
 }
 //new test
+
+// Date Input Logic (unchanged)
+const dateInput = document.getElementById("submissionDate");
+const today = new Date().toISOString().split("T")[0];
+dateInput.value = today;
+
+async function saveOrderChanges() {
+  const orderIdInput = document.getElementById("orderId").value;
+
+  // Query the collection to find the document with the given orderId
+  const ordersCollection = collection(db, "orders");
+  const q = query(ordersCollection, where("orderId", "==", orderIdInput));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    const docRef = querySnapshot.docs[0].ref; // Get the reference to the document
+
+    // Collect updated data from the form
+    const updatedData = {
+      orderId: document.getElementById("orderId").value,
+      userName: document.getElementById("userName").value,
+      customerName: document.getElementById("customerName").value,
+      productName: document.getElementById("productName").value,
+      stock: document.getElementById("stock").value,
+      submissionDate: document.getElementById("submissionDate").value,
+      width: document.getElementById("width").value,
+      height: document.getElementById("height").value,
+      quantity: document.getElementById("quantity").value,
+      material: document.getElementById("material").value,
+      internalPrint: document.getElementById("internalPrint").value,
+      printer: document.getElementById("printer").value,
+      coverType: document.getElementById("coverType").value,
+      laminationOfCover: document.getElementById("laminationOfCover").value,
+      bindingType: document.getElementById("bindingType").value,
+      comments: document.getElementById("comments").value,
+      cutting: getCheckedValues("cutting"),
+      coating: getCheckedValues("coating"),
+      folding: getCheckedValues("folding"),
+      variousFinishing: getCheckedValues("variousFinishing"),
+      numberOfPerforation: document.getElementById("numberOfPerforation").value,
+      numberOfCreasing: document.getElementById("numberOfCreasing").value,
+      numberOfFolding: document.getElementById("numberOfFolding").value,
+    };
+
+    try {
+      await updateDoc(docRef, updatedData);
+      alert("Order data updated successfully!");
+    } catch (e) {
+      console.error("Error updating document: ", e);
+      alert("Error updating order data");
+    }
+  } else {
+    alert("No such document exists!");
+  }
+}
+
+document
+  .getElementById("saveOrderButton")
+  .addEventListener("click", saveOrderChanges);

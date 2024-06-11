@@ -66,10 +66,14 @@ async function searchOrderByNumber(orderNumber) {
 }
 
 function loadDataIntoTabs(data) {
+  // --- Set Main Title ---
+  document.getElementById("customerName").textContent = data.customerName;
+  document.getElementById("orderId").textContent = data.orderId;
+
   // ---  Order Details Tab (All Data)  ---
   document.getElementById("orderDataAll").innerHTML = `
       <h2>פרטי הזמנה</h2>
-      <p><strong>מזהה הזמנה:</strong> ${data.orderId}</p>
+      <p><strong>מספר הזמנה:</strong> ${data.orderId}</p>
       <p><strong>שם משתמש:</strong> ${data.userName}</p>
       <p><strong>שם לקוח:</strong> ${data.customerName}</p>
       <p><strong>שם מוצר:</strong> ${data.productName}</p>

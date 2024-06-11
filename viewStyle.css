@@ -10,8 +10,25 @@ body {
   background-color: #f7f7f7;
   flex-direction: column;
   width: 90%;
+  font-size: x-large;
 }
-
+.form-group {
+  font-size: x-large;
+}
+#orderIdInput {
+  height: 20px;
+}
+#searchOrderButton {
+  font-size: x-large;
+}
+p {
+  font-size: x-large;
+}
+#mainTitle {
+  color: green;
+  width: 100%;
+  text-align: center;
+}
 .container {
   width: 95%;
   max-width: 800px;
@@ -46,7 +63,7 @@ body {
   transition: 0.3s;
   width: 32%;
   text-align: center;
-  font-size: 16px;
+  font-size: x-large;
 }
 
 .tablinks:hover {
@@ -54,7 +71,7 @@ body {
 }
 
 .tablinks.active {
-  background-color: #ccc;
+  background-color: #a8d4f8;
 }
 
 .tabcontent {
@@ -133,5 +150,7 @@ body {
   body {
     padding: 10%;
     margin: 5%;
+    font-size: large;
+    text-align: center;
   }
 }
