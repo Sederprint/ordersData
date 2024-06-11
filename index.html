@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <title>דו"ח איסוף נתונים להזמנה</title>
+  </head>
+  <body>
+    <button id="showAllOrdersButton">חפש הזמנה במאגר</button>
+    <button id="saveOrderButton">דרוס מידע ישן</button>
+
+    <div id="backdrop" onclick="closeAllOrdersDiv()"></div>
+    <div id="allOrdersDiv">
+      <button id="closeButton" onclick="closeAllOrdersDiv()">×</button>
+      <!-- Orders will be displayed here -->
+    </div>
+
+    <div align="center">
+      <h1>🎯 צוות דפוס הר חומה התותחים! 🚀</h1>
+
+      <p>
+        יחד נגיע לדיוק מושלם! 💪 כל נתון שנאסף כאן הוא קריטי למניעת טעויות
+        בייצור. 🔍
+      </p>
+
+      <h2>📝 נא מלאו את הדוח בסבלנות: 🙏</h2>
+
+      <p>הסבלנות היא המפתח להצלחה שלנו! 🗝️</p>
+    </div>
+    <form id="orderForm">
+      <!-- Details Section -->
+      <h2 style="color: green; display: flex; align-items: center">
+        <i class="fas fa-info-circle" style="margin-right: 8px"></i> פרטי ההזמנה
+      </h2>
+      <div class="section">
+        <div class="form-group">
+          <label class="control-label" for="userName"
+            >שם ממלא טופס <font>*</font></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="userName"
+            name="userName"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="customerName"
+            >שם לקוח <font>*</font></label
+          >
+
+          <input
+            type="text"
+            class="form-control"
+            id="customerName"
+            name="customerName"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="orderId"
+            >מספר הזמנה בבינה <font>*</font></label
+          >
+          <input type="text" class="form-control" id="orderId" name="orderId" />
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="productName"
+            >תיאור מוצר <font>*</font></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="productName"
+            name="productName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="stock">
+            בדיקת חומר במלאי <font>*</font>
+          </label>
+          <input type="text" class="form-control" id="stock" name="stock" />
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="submissionDate"
+            >תאריך <font>*</font></label
+          >
+          <input
+            type="date"
+            class="form-control"
+            id="submissionDate"
+            name="submissionDate"
+          />
+        </div>
+      </div>
+
+      <!-- Size Section -->
+      <h2 style="color: green; display: flex; align-items: center">
+        <i class="fas fa-ruler" style="margin-right: 8px"></i> גודל
+      </h2>
+      <div class="section">
+        <div class="form-group">
+          <label class="control-label" for="width"
+            >רוחב (מ"מ) <font>*</font></label
+          >
+          <input type="number" class="form-control" id="width" name="width" />
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="height"
+            >גובה (מ"מ) <font>*</font></label
+          >
+          <input type="number" class="form-control" id="height" name="height" />
+        </div>
+      </div>
+
+      <!-- Quantity Section -->
+      <h2 style="color: green; display: flex; align-items: center">
+        <i class="fas fa-layer-group" style="margin-right: 8px"></i> כמות
+      </h2>
+      <div class="section">
+        <div class="form-group">
+          <label class="control-label" for="quantity"
+            >כמות <font>*</font></label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="quantity"
+            name="quantity"
+          />
+        </div>
+      </div>
+
+      <!-- Material to Print Section -->
+      <h2 style="color: green; display: flex; align-items: center">
+        <i class="fas fa-print" style="margin-right: 8px"></i> חומר להדפסה
+      </h2>
+      <div class="section">
+        <div class="form-group">
+          <label class="control-label" for="material"
+            >חומר - בספרים דפי פנים <font>*</font></label
+          >
+          <select class="form-control" id="material" name="material">
+            <option value="300gsmGloss">300gsmGloss</option>
+            <option value="130gsmGloss">130gsmGloss</option>
+            <option value="80gsm">80gsm</option>
+            <option value="Pearl">Pearl</option>
+            <option value="rough paper">rough paper</option>
+            <option value="stickerPaper">stickerPaper</option>
+            <option value="stickerPvcWhite">stickerPvcWhite</option>
+            <option value="stickerPvcClear">stickerPvcClear</option>
+            <option value="Magnet">Magnet</option>
+            <option value="Polymer">Polymer</option>
+            <option value="canvas">canvas</option>
+            <option value="banner">banner</option>
+            <option value="kapa">kapa</option>
+            <option value="pvc">pvc</option>
+            <option value="Synthetic">Synthetic</option>
+            <option value="lokobond">lokobond</option>
+            <option value="wideSticker">wideSticker</option>
+          </select>
+        </div>
+      </div>
+      <!-- Printer Section -->
+      <h2 style="color: green; display: flex; align-items: center">
+        <i class="fas fa-print" style="margin-right: 8px"></i> הדפסה
+      </h2>
+      <div class="section">
+        <div class="form-group">
+          <label class="control-label" for="internalPrint"
+            >הדפסה(פנים בספרים) <font>*</font></label
+          >
+          <select class="form-control" id="internalPrint" name="internalPrint">
+            <option value="bw">שחור לבן</option>
+            <option value="color">צבע</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="printer"
+            >מדפסת <font>*</font></label
+          >
+          <select class="form-control" id="printer" name="printer">
+            <option value="color">Full Color</option>
+            <option value="hq-bw">High Quality Black & White</option>
+            <option value="bw">Black & White Machine</option>
+            <option value="color-bw">Color and Black & White</option>
+            <option value="wide-format">Wide Format</option>
+            <option value="sublimation">Sublimation</option>
+            <option value="ConstructionPlans">Construction Plans</option>
+            <option value="Laser">Laser</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Finishing Section -->
+      <h2 style="color: green; display: flex; align-items: center">
+        <i class="fas fa-paint-brush" style="margin-right: 8px"></i> גימורים
+      </h2>
+      <div class="section">
+        <div class="finishing-category">
+          <h3>✂ חיתוך</h3>
+          <div class="form-group">
+            <input
+              type="checkbox"
+              id="cutting1"
+              name="cutting"
+              value="Cutting"
+            />
+            <label for="cutting1">חיתוך</label>
+          </div>
+          <div class="form-group">
+            <input
+              type="checkbox"
+              id="cutting2"
+              name="cutting"
+              value="Custom cutting"
+            />
+            <label for="cutting2">חיתוך מותאם אישית</label>
+          </div>
+          <div class="form-group">
+            <input
+              type="checkbox"
+              id="cutting3"
+              name="cutting"
+              value="Small cutting"
+            />
+            <label for="cutting3">חיתוך קטן</label>
+          </div>
+          <div class="form-group">
+            <input
+              type="checkbox"
+              id="cutting4"
+              name="cutting"
+              value="Shaped cutting"
+            />
+            <label for="cutting4">חיתוך בצורת</label>
+          </div>
+        </div>
+
+        <div class="finishing-category">
+          <h3>🖌 ציפוי</h3>
+          <div class="form-group">
+            <input
+              type="checkbox"
+              id="coating1"
+              name="coating"
+              value="Glossy lamination"
+            />
+            <label for="coating1">למינציה מבריקה</label>
+          </div>
+          <div class="form-group">
+            <input
+              type="checkbox"
+              id="coating2"
+              name="coating"
+              value="Matte lamination"
+            />
+            <label for="coating2">למינציה מט</label>
+          </div>
+          <div class="form-group">
+            <input
+              type="checkbox"
+              id="coating3"
+              name="coating"
+              value="UV coating"
+            />
+            <label for="coating3">ציפוי UV</label>
+          </div>
+        </div>
+
+        <div class="finishing-category">
+          <h3>📂 קיפול</h3>
+          <div class="form-group">
+            <input
+              type="checkbox"
+              id="folding1"
+              name="folding"
+              value="Perforation"
+            />
+            <label for="folding1">פרפורציה</label>
+            <input
+              type="number"
+              class="form-control"
+              id="numberOfPerforation"
+              name="numberOfPerforation"
+              placeholder="(מספר פרפורציות)"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="checkbox"
+              id="folding2"
+              name="folding"
+              value="creasing"
+            />
+            <label for="folding2">קריעה</label>
+            <input
+              type="number"
+              class="form-control"
+              id="numberOfCreasing"
+              name="numberOfCreasing"
+              placeholder="(מספר קריעות)"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="checkbox"
+              id="folding3"
+              name="folding"
+              value="Folding"
+            />
+            <label for="folding3">ביג</label>
+            <input
+              type="number"
+              class="form-control"
+              id="numberOfFolding"
+              name="numberOfFolding"
+              placeholder="(מספר ביגים)"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="checkbox"
+              id="folding4"
+              name="folding"
+              value="Manual folding"
+            />
+            <label for="folding4">קיפול ידני</label>
+          </div>
+          <div class="form-group">
+            <input
+              type="checkbox"
+              id="folding5"
+              name="folding"
+              value="Saddle stitching"
+            />
+            <label for="folding5">הידוק</label>
+          </div>
+        </div>
+
+        <div class="finishing-category">
+          <h3>🧩 גימורים שונים</h3>
+          <div class="form-group">
+            <input
+              type="checkbox"
+              id="finishing1"
+              name="variousFinishing"
+              value="Round corners"
+            />
+            <label for="finishing1">פינות עגולות</label>
+          </div>
+          <div class="form-group">
+            <input
+              type="checkbox"
+              id="finishing2"
+              name="variousFinishing"
+              value="Variable data"
+            />
+            <label for="finishing2">מידע משתנים</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Books and Covers Section -->
+      <h2 style="color: green; display: flex; align-items: center">
+        <i class="fas fa-book" style="margin-right: 8px"></i> ספרים וכריכות
+      </h2>
+      <div class="section">
+        <div class="form-group">
+          <label class="control-label" for="coverType"
+            >חומר הכריכה <font>*</font></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="coverType"
+            name="coverType"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="laminationOfCover"
+            >למינציה של כריכה <font>*</font></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="laminationOfCover"
+            name="laminationOfCover"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="bindingType"
+            >אופן הכריכה <font>*</font></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="bindingType"
+            name="bindingType"
+          />
+        </div>
+      </div>
+      <!-- Comments Section -->
+      <h2 style="color: green; display: flex; align-items: center">
+        <i class="fas fa-comments" style="margin-right: 8px"></i> הערות
+      </h2>
+      <div class="section">
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            id="comments"
+            name="comments"
+            rows="4"
+            placeholder="הערות נוספות..."
+          ></textarea>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">שלח</button>
+    </form>
+    <script type="module" src="config.js"></script>
+    <script type="module" src="submit.js"></script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Order</title>
+    <link rel="stylesheet" href="viewStyle.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="form-group">
+      <label for="orderIdInput">הכנס מספר הזמנה:</label>
+      <input type="text" id="orderIdInput" class="form-control" />
+      <button id="searchOrderButton">טען</button>
+    </div>
+
+    <div class="tabs">
+      <button class="tablinks" onclick="openTab(event, 'allData')">
+        <i class="fas fa-info-circle"></i> כל המידע
+      </button>
+      <button class="tablinks" onclick="openTab(event, 'printData')">
+        <i class="fas fa-print"></i> מידע לדפס
+      </button>
+      <button class="tablinks" onclick="openTab(event, 'finishingData')">
+        <i class="fas fa-paint-brush"></i> מידע לגימורים
+      </button>
+    </div>
+
+    <div id="allData" class="tabcontent">
+      <div id="orderDataAll"></div>
+    </div>
+
+    <div id="printData" class="tabcontent">
+      <div id="orderDataPrint"></div>
+    </div>
+
+    <div id="finishingData" class="tabcontent">
+      <div id="orderDataFinishing"></div>
+    </div>
+
+    <script type="module" src="view.js"></script>
+  </body>
+</html>
