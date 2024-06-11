@@ -83,8 +83,10 @@ function loadDataIntoTabs(data) {
       <p><strong>גובה (מ"מ):</strong> ${data.height}</p>
       <p><strong>כמות:</strong> ${data.quantity}</p>
       <p><strong>חומר:</strong> ${data.material}</p>
-      <p><strong>הדפסה פנימית:</strong> ${data.internalPrint}</p>
+      <p><strong> צבעוניות:</strong> ${data.internalPrint}</p>
       <p><strong>מדפסת:</strong> ${data.printer}</p>
+      <p><strong>צדדים:</strong> ${data.sides}</p> <!-- Add this line -->
+
       <p><strong>סוג כריכה:</strong> ${data.coverType}</p>
       <p><strong>למינציה של הכריכה:</strong> ${data.laminationOfCover}</p>
       <p><strong>סוג כריכה:</strong> ${data.bindingType}</p>
@@ -111,34 +113,42 @@ function loadDataIntoTabs(data) {
       <h2>מידע לדפס</h2>
       <p><strong>שם מוצר:</strong> ${data.productName}</p>
       <p><strong>חומר:</strong> ${data.material}</p>
-      <p><strong>הדפסה פנימית:</strong> ${data.internalPrint}</p>
+      <p><strong> צבעוניות:</strong> ${data.internalPrint}</p>
       <p><strong>מדפסת:</strong> ${data.printer}</p>
+      <p><strong>צדדים:</strong> ${data.sides}</p> <!-- Add this line -->
+
       <p><strong>רוחב (מ"מ):</strong> ${data.width}</p>
       <p><strong>גובה (מ"מ):</strong> ${data.height}</p>
       <p><strong>כמות:</strong> ${data.quantity}</p>
+      <p><strong>הערות:</strong> ${data.comments}</p>
+
     `;
 
   // ---  Finishing Information Tab  ---
   document.getElementById("orderDataFinishing").innerHTML = `
       <h2>מידע לגימורים</h2>
-      <p><strong>סוג כריכה:</strong> ${data.coverType}</p>
-      <p><strong>למינציה של הכריכה:</strong> ${data.laminationOfCover}</p>
-      <p><strong>סוג כריכה:</strong> ${data.bindingType}</p>
-      <p><strong>חיתוך:</strong> ${
-        data.cutting ? data.cutting.join(", ") : ""
-      }</p>
-      <p><strong>ציפוי:</strong> ${
-        data.coating ? data.coating.join(", ") : ""
-      }</p>
-      <p><strong>קיפול:</strong> ${
-        data.folding ? data.folding.join(", ") : ""
-      }</p>
+      <p><strong>שם מוצר:</strong> ${data.productName}</p>
+
       <p><strong>גימורים שונים:</strong> ${
         data.variousFinishing ? data.variousFinishing.join(", ") : ""
       }</p>
-      <p><strong>מספר ניקובים:</strong> ${data.numberOfPerforation}</p>
-      <p><strong>מספר קיפולים:</strong> ${data.numberOfCreasing}</p>
-      <p><strong>מספר קיפולים:</strong> ${data.numberOfFolding}</p> 
+      <p><strong>למנציה:</strong> ${
+        data.coating ? data.coating.join(", ") : ""
+      }</p>
+      <p><strong>חיתוך:</strong> ${
+        data.cutting ? data.cutting.join(", ") : ""
+      }</p>
+      <p><strong>סוג כריכה:</strong> ${data.bindingType}</p>
+      <p><strong>למינציה של הכריכה:</strong> ${data.laminationOfCover}</p>
+     
+    
+      <p><strong>קיפול:</strong> ${
+        data.folding ? data.folding.join(", ") : ""
+      }</p>
+     
+      <p><strong> פרפורציה:</strong> ${data.numberOfPerforation}</p>
+      <p><strong>הערות:</strong> ${data.comments}</p>
+
     `;
 }
 

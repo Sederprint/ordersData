@@ -3,15 +3,22 @@
   <head>
     <link rel="stylesheet" href="styles.css" />
     <title>דו"ח איסוף נתונים להזמנה</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
   </head>
   <body>
-    <button id="showAllOrdersButton">חפש הזמנה במאגר</button>
-    <button id="saveOrderButton">דרוס מידע ישן</button>
+    <button id="showAllOrdersButton">חפש הזמנה במאגר🔎</button>
+    <button id="saveOrderButton">דרוס מידע ישן🚗</button>
+    <button type="button" id="resetFormButton">אתחל טופס🔃</button>
 
     <div id="backdrop" onclick="closeAllOrdersDiv()"></div>
-    <div id="allOrdersDiv">
-      <button id="closeButton" onclick="closeAllOrdersDiv()">×</button>
-      <!-- Orders will be displayed here -->
+    <div id="allOrdersContainer">
+      <div class="header">
+        <button id="closeButton" onclick="closeAllOrdersDiv()">×</button>
+      </div>
+      <div id="allOrdersDiv">
+        <!-- Orders will be displayed here -->
+      </div>
     </div>
 
     <div align="center">
@@ -25,7 +32,10 @@
       <h2>📝 נא מלאו את הדוח בסבלנות: 🙏</h2>
 
       <p>הסבלנות היא המפתח להצלחה שלנו! 🗝️</p>
+
+      <p>חוץ ממה שמסומן בכוכבית (*), מה שלא רלוונטי להזמנה יש להשאיר ריק.</p>
     </div>
+
     <form id="orderForm">
       <!-- Details Section -->
       <h2 style="color: green; display: flex; align-items: center">
@@ -36,12 +46,22 @@
           <label class="control-label" for="userName"
             >שם ממלא טופס <font>*</font></label
           >
+
           <input
             type="text"
             class="form-control"
             id="userName"
             name="userName"
+            required
           />
+          <div class="name-buttons">
+            <button type="button" onclick="insertName('אהרון')">אהרון</button>
+            <button type="button" onclick="insertName('יסמין')">יסמין</button>
+            <button type="button" onclick="insertName('נעמה')">נעמה</button>
+            <button type="button" onclick="insertName('ישראל')">ישראל</button>
+            <button type="button" onclick="insertName('יהונתן')">יהונתן</button>
+            <button type="button" onclick="insertName('נועם')">נועם</button>
+          </div>
         </div>
         <div class="form-group">
           <label class="control-label" for="customerName"
@@ -53,13 +73,20 @@
             class="form-control"
             id="customerName"
             name="customerName"
+            required
           />
         </div>
         <div class="form-group">
           <label class="control-label" for="orderId"
             >מספר הזמנה בבינה <font>*</font></label
           >
-          <input type="text" class="form-control" id="orderId" name="orderId" />
+          <input
+            type="text"
+            class="form-control"
+            id="orderId"
+            name="orderId"
+            required
+          />
         </div>
         <div class="form-group">
           <label class="control-label" for="productName"
@@ -70,6 +97,7 @@
             class="form-control"
             id="productName"
             name="productName"
+            required
           />
         </div>
 
@@ -77,7 +105,21 @@
           <label class="control-label" for="stock">
             בדיקת חומר במלאי <font>*</font>
           </label>
-          <input type="text" class="form-control" id="stock" name="stock" />
+          <input
+            type="text"
+            class="form-control"
+            id="stock"
+            name="stock"
+            required
+          />
+          <div class="stock-buttons">
+            <button type="button" onclick="insertStockStatus('יש במלאי')">
+              יש במלאי
+            </button>
+            <button type="button" onclick="insertStockStatus('חומר הוזמן')">
+              חומר הוזמן
+            </button>
+          </div>
         </div>
 
         <div class="form-group">
@@ -102,13 +144,76 @@
           <label class="control-label" for="width"
             >רוחב (מ"מ) <font>*</font></label
           >
-          <input type="number" class="form-control" id="width" name="width" />
+          <input
+            type="number"
+            class="form-control"
+            id="width"
+            name="width"
+            required
+          />
         </div>
         <div class="form-group">
           <label class="control-label" for="height"
             >גובה (מ"מ) <font>*</font></label
           >
-          <input type="number" class="form-control" id="height" name="height" />
+          <input
+            type="number"
+            class="form-control"
+            id="height"
+            name="height"
+            required
+          />
+        </div>
+        <div class="size-buttons">
+          <button
+            type="button"
+            class="size-btn size-btn-1"
+            onclick="setCommonSize(487, 330)"
+          >
+            487mm x 330mm
+          </button>
+          <button
+            type="button"
+            class="size-btn size-btn-2"
+            onclick="setCommonSize(297, 420)"
+          >
+            A3
+          </button>
+          <button
+            type="button"
+            class="size-btn size-btn-3"
+            onclick="setCommonSize(210, 297)"
+          >
+            A4
+          </button>
+          <button
+            type="button"
+            class="size-btn size-btn-4"
+            onclick="setCommonSize(148, 210)"
+          >
+            A5
+          </button>
+          <button
+            type="button"
+            class="size-btn size-btn-5"
+            onclick="setCommonSize(105, 148)"
+          >
+            A6
+          </button>
+          <button
+            type="button"
+            class="size-btn size-btn-6"
+            onclick="setCommonSize(100, 150)"
+          >
+            100mm x 150mm
+          </button>
+          <button
+            type="button"
+            class="size-btn size-btn-7"
+            onclick="setCommonSize(50, 90)"
+          >
+            כרטיסי ביקור
+          </button>
         </div>
       </div>
 
@@ -126,7 +231,59 @@
             class="form-control"
             id="quantity"
             name="quantity"
+            required
           />
+        </div>
+        <div id="quantityButtons" class="mt-2">
+          <button
+            type="button"
+            class="btn btn-sm btn-circle mr-2"
+            onclick="setQuantity(1)"
+          >
+            1
+          </button>
+          <button
+            type="button"
+            class="btn btn-sm btn-circle mr-2"
+            onclick="setQuantity(50)"
+          >
+            50
+          </button>
+          <button
+            type="button"
+            class="btn btn-sm btn-circle mr-2"
+            onclick="setQuantity(100)"
+          >
+            100
+          </button>
+          <button
+            type="button"
+            class="btn btn-sm btn-circle mr-2"
+            onclick="setQuantity(200)"
+          >
+            200
+          </button>
+          <button
+            type="button"
+            class="btn btn-sm btn-circle mr-2"
+            onclick="setQuantity(500)"
+          >
+            500
+          </button>
+          <button
+            type="button"
+            class="btn btn-sm btn-circle mr-2"
+            onclick="setQuantity(1000)"
+          >
+            1000
+          </button>
+          <button
+            type="button"
+            class="btn btn-sm btn-circle mr-2"
+            onclick="setQuantity(5000)"
+          >
+            5000
+          </button>
         </div>
       </div>
 
@@ -137,29 +294,41 @@
       <div class="section">
         <div class="form-group">
           <label class="control-label" for="material"
-            >חומר - בספרים דפי פנים <font>*</font></label
+            >חומר (בספרים דפי פנים) <font>*</font></label
           >
-          <select class="form-control" id="material" name="material">
-            <option value="300gsmGloss">300gsmGloss</option>
-            <option value="130gsmGloss">130gsmGloss</option>
-            <option value="80gsm">80gsm</option>
-            <option value="Pearl">Pearl</option>
-            <option value="rough paper">rough paper</option>
-            <option value="stickerPaper">stickerPaper</option>
-            <option value="stickerPvcWhite">stickerPvcWhite</option>
-            <option value="stickerPvcClear">stickerPvcClear</option>
-            <option value="Magnet">Magnet</option>
-            <option value="Polymer">Polymer</option>
-            <option value="canvas">canvas</option>
-            <option value="banner">banner</option>
-            <option value="kapa">kapa</option>
-            <option value="pvc">pvc</option>
-            <option value="Synthetic">Synthetic</option>
-            <option value="lokobond">lokobond</option>
-            <option value="wideSticker">wideSticker</option>
-          </select>
+          <input
+            list="materialOptions"
+            class="form-control"
+            id="material"
+            name="material"
+            required
+          />
+          <datalist id="materialOptions">
+            <option value="נייר כרומו מבריק 300 גר'">
+              נייר כרומו מבריק 300 גר'
+            </option>
+            <option value="נייר כרומו מבריק 130 גר'">
+              נייר כרומו מבריק 130 גר'
+            </option>
+            <option value="נייר רגיל 80 גר'">נייר רגיל 80 גר'</option>
+            <option value="נייר פנינה">נייר פנינה</option>
+            <option value="נייר מחוספס">נייר מחוספס</option>
+            <option value="נייר מדבקה">נייר מדבקה</option>
+            <option value="מדבקת PVC לבנה">מדבקת PVC לבנה</option>
+            <option value="מדבקת PVC שקופה">מדבקת PVC שקופה</option>
+            <option value="מגנט">מגנט</option>
+            <option value="פולימר">פולימר</option>
+            <option value="קנבס">קנבס</option>
+            <option value="באנר">באנר</option>
+            <option value="קאפה">קאפה</option>
+            <option value="פי.וי.סי">פי.וי.סי</option>
+            <option value="סינטטי">סינטטי</option>
+            <option value="לוקובונד">לוקובונד</option>
+            <option value="מדבקה רחבה">מדבקה רחבה</option>
+          </datalist>
         </div>
       </div>
+
       <!-- Printer Section -->
       <h2 style="color: green; display: flex; align-items: center">
         <i class="fas fa-print" style="margin-right: 8px"></i> הדפסה
@@ -167,9 +336,15 @@
       <div class="section">
         <div class="form-group">
           <label class="control-label" for="internalPrint"
-            >הדפסה(פנים בספרים) <font>*</font></label
+            >הדפסה (פנים בספרים) <font>*</font></label
           >
-          <select class="form-control" id="internalPrint" name="internalPrint">
+          <select
+            class="form-control"
+            id="internalPrint"
+            name="internalPrint"
+            required
+          >
+            <option value="" disabled selected hidden>בחר אפשרות</option>
             <option value="bw">שחור לבן</option>
             <option value="color">צבע</option>
           </select>
@@ -178,15 +353,28 @@
           <label class="control-label" for="printer"
             >מדפסת <font>*</font></label
           >
-          <select class="form-control" id="printer" name="printer">
-            <option value="color">Full Color</option>
-            <option value="hq-bw">High Quality Black & White</option>
-            <option value="bw">Black & White Machine</option>
-            <option value="color-bw">Color and Black & White</option>
-            <option value="wide-format">Wide Format</option>
-            <option value="sublimation">Sublimation</option>
-            <option value="ConstructionPlans">Construction Plans</option>
-            <option value="Laser">Laser</option>
+          <select class="form-control" id="printer" name="printer" required>
+            <option value="" disabled selected hidden>בחר אפשרות</option>
+            <option value="color">צבע מלא</option>
+            <option value="hq-bw">שחור לבן באיכות גבוהה</option>
+            <option value="bw">מכונת שחור לבן</option>
+            <option value="color-bw">צבע ושחור לבן</option>
+            <option value="wide-format">הדפסה בפורמט רחב</option>
+            <option value="sublimation">סובלימציה</option>
+            <option value="ConstructionPlans">תוכניות בנייה</option>
+            <option value="Laser">לייזר</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="sides"
+            >צדדים-חד צדדי/דו צדדי <font>*</font></label
+          >
+          <select class="form-control" id="sides" name="sides" required="">
+            <option value="" disabled="" selected="" hidden="">
+              בחר אפשרות
+            </option>
+            <option value="single">חד צדדי</option>
+            <option value="double">דו צדדי</option>
           </select>
         </div>
       </div>
@@ -214,25 +402,7 @@
               name="cutting"
               value="Custom cutting"
             />
-            <label for="cutting2">חיתוך מותאם אישית</label>
-          </div>
-          <div class="form-group">
-            <input
-              type="checkbox"
-              id="cutting3"
-              name="cutting"
-              value="Small cutting"
-            />
-            <label for="cutting3">חיתוך קטן</label>
-          </div>
-          <div class="form-group">
-            <input
-              type="checkbox"
-              id="cutting4"
-              name="cutting"
-              value="Shaped cutting"
-            />
-            <label for="cutting4">חיתוך בצורת</label>
+            <label for="cutting2">חיתוך צורני-אייאקו</label>
           </div>
         </div>
 
@@ -256,15 +426,6 @@
             />
             <label for="coating2">למינציה מט</label>
           </div>
-          <div class="form-group">
-            <input
-              type="checkbox"
-              id="coating3"
-              name="coating"
-              value="UV coating"
-            />
-            <label for="coating3">ציפוי UV</label>
-          </div>
         </div>
 
         <div class="finishing-category">
@@ -285,22 +446,7 @@
               placeholder="(מספר פרפורציות)"
             />
           </div>
-          <div class="form-group">
-            <input
-              type="checkbox"
-              id="folding2"
-              name="folding"
-              value="creasing"
-            />
-            <label for="folding2">קריעה</label>
-            <input
-              type="number"
-              class="form-control"
-              id="numberOfCreasing"
-              name="numberOfCreasing"
-              placeholder="(מספר קריעות)"
-            />
-          </div>
+
           <div class="form-group">
             <input
               type="checkbox"
@@ -355,7 +501,16 @@
               name="variousFinishing"
               value="Variable data"
             />
-            <label for="finishing2">מידע משתנים</label>
+            <label for="finishing2">מידע משתנה</label>
+          </div>
+          <div class="form-group">
+            <input
+              type="checkbox"
+              id="noFinishing"
+              name="variousFinishing"
+              value="ללא גימורים"
+            />
+            <label for="noFinishing">ללא גימורים</label>
           </div>
         </div>
       </div>
@@ -370,33 +525,60 @@
             >חומר הכריכה <font>*</font></label
           >
           <input
-            type="text"
+            list="coverTypeOptions"
             class="form-control"
             id="coverType"
             name="coverType"
           />
+          <datalist id="coverTypeOptions">
+            <option value="נייר כרומו מט 300 גר'">נייר כרומו מט 300 גר'</option>
+            <option value="נייר כרומו מט 170 גר'">נייר כרומו מט 170 גר'</option>
+            <option value="נייר כרומו מט 130 גר'">נייר כרומו מט 130 גר'</option>
+            <option value="נייר כרומו מט 115 גר'">נייר כרומו מט 115 גר'</option>
+            <option value="נייר כרומו מט 250 גר'">נייר כרומו מט 250 גר'</option>
+            <option value="נייר נטול עץ 250 גר'">נייר נטול עץ 250 גר'</option>
+            <option value="נייר נטול עץ 170 גר'">נייר נטול עץ 170 גר'</option>
+            <option value="נייר רגיל 80 גר'">נייר רגיל 80 גר'</option>
+            <option value="נייר פנינה">נייר פנינה</option>
+            <option value="נייר מחוספס">נייר מחוספס</option>
+          </datalist>
         </div>
+
         <div class="form-group">
           <label class="control-label" for="laminationOfCover"
             >למינציה של כריכה <font>*</font></label
           >
           <input
-            type="text"
+            list="laminationOfCoverOptions"
             class="form-control"
             id="laminationOfCover"
             name="laminationOfCover"
           />
+          <datalist id="laminationOfCoverOptions">
+            <option value="ללא למנציה">ללא למנציה</option>
+            <option value="למנציה מבריק">למנציה מבריק</option>
+            <option value="למנציה מט">למנציה מט</option>
+          </datalist>
         </div>
+
         <div class="form-group">
           <label class="control-label" for="bindingType"
             >אופן הכריכה <font>*</font></label
           >
           <input
-            type="text"
+            list="bindingTypeOptions"
             class="form-control"
             id="bindingType"
             name="bindingType"
           />
+          <datalist id="bindingTypeOptions">
+            <option value="בוקלט">בוקלט</option>
+            <option value="ספיראלה">ספיראלה</option>
+            <option value="סיכות בצד">סיכות בצד</option>
+            <option value="כריכה רכה">כריכה רכה</option>
+            <option value="כריכה קשה">כריכה קשה</option>
+            <option value="סיכה בפינה">סיכה בפינה</option>
+          </datalist>
         </div>
       </div>
       <!-- Comments Section -->

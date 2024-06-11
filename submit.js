@@ -15,6 +15,19 @@ document
   .getElementById("orderForm")
   .addEventListener("submit", async function (e) {
     e.preventDefault();
+    // Validation for finishing options
+    var checkboxes = document.querySelectorAll(
+      'input[name="cutting"], input[name="coating"], input[name="folding"], input[name="variousFinishing"], input[name="noFinishing"]'
+    );
+    var oneChecked = Array.prototype.slice
+      .call(checkboxes)
+      .some((x) => x.checked);
+
+    if (!oneChecked) {
+      alert("אנא בחר לפחות אופציית גימור אחת");
+      return; // Prevent form submission
+    }
+
     const formData = {
       orderId: document.getElementById("orderId").value,
       userName: document.getElementById("userName").value,
@@ -31,13 +44,15 @@ document
       coverType: document.getElementById("coverType").value,
       laminationOfCover: document.getElementById("laminationOfCover").value,
       bindingType: document.getElementById("bindingType").value,
+      sides: document.getElementById("sides").value, // Add this line
+
       comments: document.getElementById("comments").value,
       cutting: getCheckedValues("cutting"),
       coating: getCheckedValues("coating"),
       folding: getCheckedValues("folding"),
       variousFinishing: getCheckedValues("variousFinishing"),
       numberOfPerforation: document.getElementById("numberOfPerforation").value,
-      numberOfCreasing: document.getElementById("numberOfCreasing").value,
+      // numberOfCreasing: document.getElementById("numberOfCreasing").value,
       numberOfFolding: document.getElementById("numberOfFolding").value,
     };
 
@@ -96,20 +111,24 @@ document
       const data = doc.data();
       const orderElement = document.createElement("div");
       orderElement.innerHTML = `
-      <p><strong>Order ID:</strong> ${data.orderId}</p>
-      <p><strong>Customer Name:</strong> ${data.customerName}</p>
+      <div class="lineToSpreate">
+
+    </div>
+    <p><strong>👳‍♂️שם לקוח:</strong> ${data.customerName}</p>
+
+      <p><strong>🛒מספר הזמנה:</strong> ${data.orderId}</p>
       <button onclick="copyOrderLink('${doc.id}')">העתק קישור</button>
       <button onclick="loadOrderData('${doc.id}')">טען</button>
     `;
       allOrdersDiv.appendChild(orderElement);
     });
 
-    allOrdersDiv.style.display = "block";
+    document.getElementById("allOrdersContainer").style.display = "block";
     backdrop.style.display = "block";
   });
 
 window.closeAllOrdersDiv = function () {
-  document.getElementById("allOrdersDiv").style.display = "none";
+  document.getElementById("allOrdersContainer").style.display = "none";
   document.getElementById("backdrop").style.display = "none";
 };
 
@@ -275,3 +294,48 @@ async function saveOrderChanges() {
 document
   .getElementById("saveOrderButton")
   .addEventListener("click", saveOrderChanges);
+
+function insertName(name) {
+  document.getElementById("userName").value = name;
+}
+window.insertName = insertName; // Assign the function reference
+
+$(function () {
+  // Fetch item names from the JSON file
+  $.getJSON("items.json", function (items) {
+    // Initialize autocomplete for product names
+    $("#productName").autocomplete({
+      source: items,
+    });
+  });
+
+  // Fetch customer names from the JSON file
+  $.getJSON("customer_names.json", function (customers) {
+    // Initialize autocomplete for customer names
+    $("#customerName").autocomplete({
+      source: customers,
+    });
+  });
+});
+function insertStockStatus(status) {
+  document.getElementById("stock").value = status;
+}
+window.insertStockStatus = insertStockStatus;
+
+function setCommonSize(width, height) {
+  document.getElementById("width").value = width;
+  document.getElementById("height").value = height;
+}
+window.setCommonSize = setCommonSize;
+function setQuantity(quantity) {
+  document.getElementById("quantity").value = quantity;
+}
+window.setQuantity = setQuantity;
+document
+  .getElementById("resetFormButton")
+  .addEventListener("click", function () {
+    document.getElementById("orderForm").reset();
+    const dateInput = document.getElementById("submissionDate");
+    const today = new Date().toISOString().split("T")[0];
+    dateInput.value = today;
+  });
