@@ -60,7 +60,7 @@ document
       const docRef = await addDoc(collection(db, "orders"), formData);
       console.log("Document written with ID: ", docRef.id);
       showConfirmation(
-        `Order submitted! View it at: <a href="http://127.0.0.1:5500/view.html?id=${docRef.id}">View Order</a>`,
+        `Order submitted! View it at: <a href="https://storage.googleapis.com/my_appes/data%20for%20orders/view.html?id=${docRef.id}">View Order</a>`,
         docRef.id
       );
     } catch (e) {
@@ -87,7 +87,7 @@ function showConfirmation(message, orderId) {
   document.body.appendChild(confirmationDiv);
 
   document.getElementById("copyLinkButton").addEventListener("click", () => {
-    const link = `http://127.0.0.1:5500/view.html?id=${orderId}`;
+    const link = `https://storage.googleapis.com/my_appes/data%20for%20orders/view.html?id=${orderId}">View Order`;
     navigator.clipboard.writeText(link).then(() => {
       alert("Link copied to clipboard");
     });
@@ -133,7 +133,7 @@ window.closeAllOrdersDiv = function () {
 };
 
 window.copyOrderLink = function (orderId) {
-  const link = `http://127.0.0.1:5500/view.html?id=${orderId}`;
+  const link = `https://storage.googleapis.com/my_appes/data%20for%20orders/view.html?id=${orderId}`;
   navigator.clipboard.writeText(link).then(() => {
     alert("Link copied to clipboard");
   });

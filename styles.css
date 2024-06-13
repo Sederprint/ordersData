@@ -191,7 +191,7 @@ h2 {
     font-size: 18px !important; /* Increase font size for better readability */
   }
   #orderForm {
-    font-size: x-large;
+    font-size: large;
   }
   .finishing-category {
     width: 100% !important;
@@ -217,7 +217,7 @@ h2 {
   }
 
   .control-label {
-    font-size: 5rem !important; /* Increase label font size for better readability */
+    font-size: 2rem !important; /* Increase label font size for better readability */
   }
 
   h1,
